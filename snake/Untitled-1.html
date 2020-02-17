@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <style>
+    canvas {
+      background: gray;
+      position: absolute;
+    left: 410px;
+    top: 10px;
+    }
+    #division {
+      position: absolute;
+    left: 200px;
+    top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    }
+</style>
+<div id="division"></div>
+<canvas id="myCanvas" width="400" height="600">
+</canvas>
+<script>
+  var img = new Image();   // Crée un nouvel élément Image
+img.src = 'voiture50.png'; // Définit le chemin vers sa source
+  function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+var ym2 = ym;
+var ym3 = ym2-100;
+var ym4 = ym3-100;
+  var canvas = document.getElementById('myCanvas');
+var ctx = canvas.getContext('2d');
+var start = 0;
+  var a = 1;
+  var x = 150;
+  var y = 400;
+  var v =1;
+  var vi = 0;
+var xm = getRandomInt(8)*50;
+
+var ym = 0;
+var temp = 0;
+var perdu = 0;
+  function draw() {
+    ctx.fillStyle = "dark";
+    ctx.drawImage(img, x, y);
+if (a===1) {
+  ctx.drawImage(img, xm, ym);
+    if (vi > 2) {
+      ctx.drawImage(img, xm2, ym2);
+    }
+    if (vi > 3) {
+      ctx.drawImage(img, xm3, ym3);
+    }
+    if (vi > 5) {
+      ctx.drawImage(img, xm4, ym4);
+    }
+     };
+  }
+  function times() {
+    if (perdu===0) {
+temp += 1;
+document.getElementById('division').innerHTML='<b>temp : </b>' + temp;
+  }};
+  function erase() {
+    ym2 = ym;
+    ym3 = ym-100;
+    ym4 = ym-100;
+  }
+  function drawMeteor() {
+    if (perdu === 0) {
+    if (a===1) {
+    ctx.clearRect(xm, ym, 50, 50);
+    ym += v;
+    ctx.clearRect(xm2, ym2-50, 50, 50);
+    ctx.clearRect(xm3, ym3-50, 50, 50);
+    ctx.clearRect(xm4, ym4-50, 50, 50);
+     }};
+  };
+  function stop() {
+    if (perdu === 0) {
+if (ym > 600) {
+  ctx.clearRect(0, 0, 400, 600);
+  perdu -= perdu;
+  ym -= ym;
+  xm = getRandomInt(8)*50;
+  if (vi > 2) {
+  xm2 = getRandomInt(8)*50;
+  }
+  if (vi > 3) {
+  xm3 = getRandomInt(8)*50;
+  }
+  if (vi > 5) {
+  xm4 = getRandomInt(8)*50;
+  }
+  vi += 1;
+  if (v<4) {
+  v += v;
+  
+}}};
+  };
+  setInterval(drawMeteor,10);
+  setInterval(draw,10);
+  setInterval(stop,100);
+  setInterval(perdre,1);
+  setInterval(erase,10);
+  setInterval(times,1000);
+function perdre() {
+if (xm===x && ym===y) {
+  perdu=1;
+  console.log("perdu");
+}
+if (xm2===x && ym2===y) {
+  perdu=1;
+  console.log("perdu");
+}
+if (xm3===x && ym3===y) {
+  perdu=1;
+  console.log("perdu");
+}
+if (xm4===x && ym4===y) {
+  perdu=1;
+  console.log("perdu");
+}
+};
+
+  document.addEventListener("keydown",keyPush);
+function keyPush(evt) {
+    switch(evt.keyCode) {
+        case 37:
+        if (perdu === 0) {
+        ctx.clearRect(x, y, 50, 50);
+            x-=50;
+          };
+            break;
+        case 39:
+        if (perdu === 0) {
+        ctx.clearRect(x, y, 50, 50);
+            x+=50;;
+};
+            break;
+            case 40:
+              start = 1;
+              v = 1;
+              vi -= vi;
+              temp -= temp;
+ym = 700;
+  perdu -= perdu;
+  ctx.clearRect(0,0,400,600)
+  x = 200;
+    }
+}
+
+</script>
+</body>
+</html>
